@@ -78,9 +78,7 @@ nav {
   align-items: center;
   gap: 0.5rem;
   /*text-shadow: 0 0 30px rgba(59, 130, 246, 0.3);*/
-  position: absolute;
-  left: 25%;
-  transform: translateX(-50%);
+ 
 }
 
 .logo-icon {
@@ -135,12 +133,17 @@ nav {
   border-radius: 2px;
 }
 
-.nav-links a:hover {
+.nav-links a:hover,
+.nav-links a:focus-visible{
   color: #3b82f6;
   transform: translateY(-2px);
+  outline: 2px solid #60a5fa;
+  outline-offset: 4px;
+  border-radius: 4px;
 }
 
-.nav-links a:hover::after {
+.nav-links a:hover::after,
+.nav-links a:focus-visible::after {
   width: 100%;
 }
 
@@ -1166,16 +1169,7 @@ nav {
   line-height: 1.8;
   font-size: 1.05rem;
 }
-.problem-item {
-  background: rgba(255, 255, 255, 0.95);
-  padding: 2.5rem;
-  border-radius: 20px;
-  border: 3px solid rgba(59, 130, 246, 0.3);
-  transition: all 0.4s;
-  box-shadow: 0 8px 30px rgba(59, 130, 246, 0.15);
-  position: relative;
-  overflow: hidden;
-}
+
 
 .problem-number {
   position: absolute;
@@ -1804,5 +1798,102 @@ nav {
 
   .slider-arrow-right {
     right: 10px;
+  }
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: 1fr; /* Mobile: 1 column */
+  gap: 2rem;
+  margin-top: 4rem;
+  position: relative;
+  z-index: 1;
+}
+
+/* --- Mobile Navigation --- */
+.menu-toggle {
+  display: none; /* Hidden by default */
+  background: none;
+  border: none;
+  color: #3b82f6;
+  font-size: 2rem;
+  cursor: pointer;
+  z-index: 1001; /* Make sure it's on top */
+}
+
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: block; /* Show on mobile */
+  }
+
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.98);
+    padding: 2rem;
+    gap: 1.5rem;
+    border-top: 2px solid rgba(59, 130, 246, 0.3);
+  }
+
+  .nav-links.active {
+    display: flex; /* Show menu when active */
+  }
+}
+
+@media (min-width: 576px) {
+  .gallery-grid {
+    grid-template-columns: repeat(2, 1fr); /* Small Tablet: 2 columns */
+  }
+}
+
+@media (min-width: 992px) {
+  .gallery-grid {
+    grid-template-columns: repeat(4, 1fr); /* Desktop: 4 columns */
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: 3rem;
+  }
+
+  .hero-subtitle {
+    font-size: 1.6rem;
+  }
+
+  .hero-description {
+    font-size: 1.1rem;
+  }
+
+  /* Hide complex animations that can clutter small screens */
+  .dna-helix,
+  .atom,
+  .hero::after {
+    display: none;
+  }
+  
+  /* Reposition or resize other elements */
+  .hero-science-image {
+      width: 150px;
+      height: 150px;
+      opacity: 0.5;
+      top: 15%; /* Example reposition */
+  }
+}
+
+
+/* Minimize animation for users who need it */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }
